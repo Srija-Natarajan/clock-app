@@ -11,16 +11,13 @@ function updateClock() {
 
     document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
 
-    // Call setTheme to update the background based on the hour
-    setTheme(now.getHours());
+    setTimeTheme(now.getHours());
 }
 
-function setTheme(hour) {
+// Set theme based on time
+function setTimeTheme(hour) {
     const body = document.body;
-    // Remove all possible theme classes first
     body.classList.remove('morning', 'afternoon', 'evening', 'night');
-
-    // Add a class based on the hour
     if (hour >= 6 && hour < 12) {
         body.classList.add('morning');
     } else if (hour >= 12 && hour < 17) {
@@ -32,6 +29,54 @@ function setTheme(hour) {
     }
 }
 
-// Update the clock every second
+// Set theme based on location
+function setLocationTheme(city) {
+    const body = document.body;
+    body.classList.remove('paris', 'newyork', 'tokyo', 'default-location');
+
+    // Add your city/landmark themes here
+    if (city.toLowerCase().includes("paris")) {
+        body.classList.add('paris');
+    } else if (city.toLowerCase().includes("new york")) {
+        body.classList.add('newyork');
+    } else if (city.toLowerCase().includes("tokyo")) {
+        body.classList.add('tokyo');
+    } else {
+        body.classList.add('default-location');
+    }
+}
+
+// Try to get user's city using Geolocation and a simple API
+function fetchCityFromCoords(lat, lon) {
+    // This uses the OpenStreetMap Nominatim API (no key needed for demo/small usage)
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+        .then(response => response.json())
+        .then(data => {
+            const city = data.address.city || data.address.town || data.address.village || data.address.state || "Unknown";
+            setLocationTheme(city);
+        })
+        .catch(() => {
+            setLocationTheme("Unknown");
+        });
+}
+
+function getLocationAndSetTheme() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Success
+                fetchCityFromCoords(position.coords.latitude, position.coords.longitude);
+            },
+            function(error) {
+                // Denied or error
+                setLocationTheme("Unknown");
+            }
+        );
+    } else {
+        setLocationTheme("Unknown");
+    }
+}
+
 setInterval(updateClock, 1000);
 updateClock();
+getLocationAndSetTheme();
