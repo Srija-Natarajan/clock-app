@@ -1,37 +1,18 @@
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.5s;
+/* Existing time-based themes ... */
+
+/* Location/landmark-based themes */
+.paris {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
 
-.clock-container {
-    background: rgba(255,255,255,0.2);
-    padding: 40px 60px;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+.newyork {
+    background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
 
-#clock {
-    font-size: 4rem;
-    font-family: 'Courier New', Courier, monospace;
-    color: #222;
+.tokyo {
+    background: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
 
-/* Thematic backgrounds */
-.morning {
-    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-}
-.afternoon {
-    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-}
-.evening {
-    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
-}
-.night {
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    color: #fff;
+.default-location {
+    background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
 }
