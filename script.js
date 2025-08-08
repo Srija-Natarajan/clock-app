@@ -14,7 +14,6 @@ function updateClock() {
     setTimeTheme(now.getHours());
 }
 
-// Set theme based on time
 function setTimeTheme(hour) {
     const body = document.body;
     body.classList.remove('morning', 'afternoon', 'evening', 'night');
@@ -29,26 +28,39 @@ function setTimeTheme(hour) {
     }
 }
 
-// Set theme based on location
 function setLocationTheme(city) {
     const body = document.body;
-    body.classList.remove('paris', 'newyork', 'tokyo', 'default-location');
+    const themeMsg = document.getElementById('themeMsg');
+    const themes = [
+        { name: 'paris', keywords: ['paris'], display: "Paris (Eiffel Tower)" },
+        { name: 'newyork', keywords: ['new york', 'nyc'], display: "New York (Statue of Liberty)" },
+        { name: 'tokyo', keywords: ['tokyo'], display: "Tokyo (Skytree)" },
+        { name: 'london', keywords: ['london'], display: "London (Big Ben)" },
+        { name: 'sydney', keywords: ['sydney'], display: "Sydney (Opera House)" },
+        { name: 'mumbai', keywords: ['mumbai', 'bombay'], display: "Mumbai (Gateway of India)" },
+        // Add more here!
+    ];
+    // Remove all possible location themes
+    themes.forEach(theme => body.classList.remove(theme.name));
+    body.classList.remove('default-location');
 
-    // Add your city/landmark themes here
-    if (city.toLowerCase().includes("paris")) {
-        body.classList.add('paris');
-    } else if (city.toLowerCase().includes("new york")) {
-        body.classList.add('newyork');
-    } else if (city.toLowerCase().includes("tokyo")) {
-        body.classList.add('tokyo');
-    } else {
+    let found = false;
+    city = city.toLowerCase();
+    for (const theme of themes) {
+        if (theme.keywords.some(k => city.includes(k))) {
+            body.classList.add(theme.name);
+            if (themeMsg) themeMsg.textContent = `Location theme: ${theme.display}`;
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
         body.classList.add('default-location');
+        if (themeMsg) themeMsg.textContent = `Location theme: Default`;
     }
 }
 
-// Try to get user's city using Geolocation and a simple API
 function fetchCityFromCoords(lat, lon) {
-    // This uses the OpenStreetMap Nominatim API (no key needed for demo/small usage)
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
         .then(response => response.json())
         .then(data => {
@@ -64,11 +76,9 @@ function getLocationAndSetTheme() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                // Success
                 fetchCityFromCoords(position.coords.latitude, position.coords.longitude);
             },
             function(error) {
-                // Denied or error
                 setLocationTheme("Unknown");
             }
         );
