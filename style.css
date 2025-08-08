@@ -1,18 +1,23 @@
 /* Existing time-based themes ... */
 
-/* Location/landmark-based themes */
 .paris {
     background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
-
 .newyork {
     background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
-
 .tokyo {
     background: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
 }
-
+.london {
+    background: url('https://images.unsplash.com/photo-1465101178521-c1a2b83f87fa?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+}
+.sydney {
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+}
+.mumbai {
+    background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+}
 .default-location {
     background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
 }
