@@ -20,3 +20,18 @@ body {
     font-family: 'Courier New', Courier, monospace;
     color: #222;
 }
+
+/* Thematic backgrounds */
+.morning {
+    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+}
+.afternoon {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+}
+.evening {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+}
+.night {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #fff;
+}
